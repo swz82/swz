@@ -8,14 +8,14 @@ $dbPassword = "docker";
 // Open a connection to the database server
 $mysqli = new mysqli($dbServer, $dbUName, $dbPassword, $dbName);
 
-/*
- * This is the "official" OO way to do it,
- * BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
- */
-if ($mysqli->connect_error) 
+
+// Returns connection resource if OK or false if error
+// You don't have to specify $dbName, in which case you
+// will need to call mysqli_select($dbName) instead.
+$connection = mysqli_connect($dbServer, $dbUName, $dbPassword, $dbName);       
+if($connection == false)
 {
-    die("Connect Error (" . $mysqli->connect_errno . ")" 
-       . $mysqli->connect_error);
+    die("Unable to open connection to database" . mysqli_error());
 }
 
 // You can use mysqli_select($connection, $dbname) to connect to another database if you need to.
@@ -23,27 +23,15 @@ if ($mysqli->connect_error)
 $name = $_POST['username'];
 $pwd = $_POST['password'];
 
-if($name=='')
-{
-    echo "<script>alert('Please enter username!');location='login.html'</script>";
-}
-else if($pwd=='')
-{
-    echo "<script>alert('Please enter password!');location='login.html'</script>";
-}
-
+$enteredName = "xy";	// Pretend the user entered this
 
 // Execute SQL query, for SELECT returns resource 
 // on true or false if error
-$records = $mysqli->query("SELECT * FROM Students WHERE username = '" . PreventSqlInjection($mysqli, $name) . "' AND password = '" . PreventSqlInjection($mysqli, $pwd) . "'");
+$records = $mysqli->query("SELECT * FROM Students WHERE username LIKE '" . PreventSqlInjection($mysqli, $enteredName) . "'");
 if($records == false)
 {
-    die("Query contains error" . mysqli_error());echo "<script>alert('Wrong password!');location='login.html'</script>";   
+    die("Query contains error");
 }
-else
-{
-    echo "<script>alert('Success!');location='web1.php'</script>";
-};
 
 // Prevent hacker typing something nasty into a Form
 // and performing an SQL injection attack.
@@ -64,6 +52,7 @@ function PreventSqlInjection($mysqli, $text)
     // If using MySQL, escape special characters	
     return $mysqli->real_escape_string($text);
 }
+
 
 $closed = mysqli_close($connection);
 if($closed == false)
