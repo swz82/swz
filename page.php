@@ -1,9 +1,5 @@
 <?php
-require_once 'Counter.php';
-require_once 'CountListener.php';
-
-use \Main\ObserverPattern\Counter;
-use \Main\ObserverPattern\CountListener;
+$name=$_POST['search'];
 
 // Set up variables for the database
 $dbServer = "mysql:3306";
@@ -24,63 +20,38 @@ if ($mysqli->connect_error)
        . $mysqli->connect_error);
 }
 
-// You can use mysqli_select($connection, $dbname) to connect to another database if you need to.
-
-$name = $_POST['username'];
-$pwd = $_POST['password'];
-
-$counter = new Counter(5);
-$observer = new CountListener($name);
-$counter->Attach($observer);
-
-$counter->Login($name, $pwd, $mysqli);
-if($name=='')
+if($name=="")
 {
-    echo "<script>alert('Please enter username!');location='login.html'</script>";
+    echo "<script>alert('No result!');location='page.html'</script>";
 }
-else if($pwd=='')
-{
-    echo "<script>alert('Please enter password!');location='login.html'</script>";
-}
-
 
 // Execute SQL query, for SELECT returns resource 
 // on true or false if error
 $records = $mysqli->query("SELECT * FROM Students WHERE 
-    username LIKE '" . PreventSqlInjection($mysqli, $name) . "' 
-    AND password LIKE '" . PreventSqlInjection($mysqli, $pwd) . "'");
+    username LIKE '%" . PreventSqlInjection($mysqli, $name) . "%'");
 if($records == false)
 {
     die("Query contains error" . mysqli_error());
     echo "<script>alert('Query contains error!');location='login.html'</script>";   
 }
 
-$date = date('Y-m-d h:i:s', time());
 $record = mysqli_fetch_array($records);
 if($record==NULL)
 {
-    echo "<script>alert('Wrong password!');location='login.html'</script>";
+    echo "<script>alert('No result!');location='page.html'</script>";
 }
 else
 {
-    $log = $mysqli->query(
-        "INSERT INTO Log(name, log, time) VALUES(" 
-           . "'" . PreventSqlInjection($mysqli, $name)
-           . "', 'login' , '{$date}' )"
-         );
-    if($log == false)
-    {
-        die("Query contains error");
-    }
-    if($record["id"]=="administrator")
-    {
-        echo "<script>alert('Success!');location='welcomeA.html'</script>";
-    }
-    else
-    {
-        echo "<script>alert('Success!');location='welcomeU.html'</script>";
-    }
-    
+    echo " ". $record["id"]
+        . " : name=" . $record["username"] 
+        . " info " . $record["information"] . "<br/>";
+}
+
+while($record = mysqli_fetch_array($records))
+{
+    echo " ". $record["id"]
+        . " : name=" . $record["username"] 
+        . " info " . $record["information"] . "<br/>";	
 }
 
 // Prevent hacker typing something nasty into a Form

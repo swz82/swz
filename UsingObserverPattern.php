@@ -5,25 +5,21 @@ require_once 'CountListener.php';
 use \Main\ObserverPattern\Counter;
 use \Main\ObserverPattern\CountListener;
 
-$counter = new Counter(5);
-$observer = new CountListener(2);
+$counter1 = new Counter(5);
+$counter2 = new Counter(5);
+$counter3 = new Counter(5);
+$observer = new CountListener('swz');
 
-$counter->Attach(new CountListener(1));
-$counter->Attach($observer);
-$counter->Attach(new CountListener(3));
-$counter->Increment();
-$counter->Increment();
-$counter->Increment();
-$counter->Increment();
-$counter->Increment();
-$counter->Increment(); // Notify
-$counter->Increment(); // Notify
-$counter->Decrement();
-$counter->Decrement();
-$counter->Decrement();
-$counter->Detach($observer);
-$counter->Increment();
-$counter->Increment(); // Notify
+$counter1->Attach(new CountListener('www'));
+$counter2->Attach($observer);
+$counter3->Attach(new CountListener(3));
+$counter1->Login();
+$counter2->Login();
+$counter3->Login();
+$counter2->Detach($observer);
+$counter1->Login();
+$counter2->Login(); // Notify
+$counter3->Search();
 
 
 ?>

@@ -24,7 +24,12 @@ class CountListener extends Objects implements IObserver
 	
 	public function Update(IObservable $observable)
 	{
-		echo "Count listener {$this->_id} just got updated<br/>";
+		echo "User {$this->_id} just logged in<br/>";
+	}
+
+	public function Log(IObservable $observable)
+	{
+		echo "User {$this->_id} just searched<br/>";
 	}
 }
 ?>
