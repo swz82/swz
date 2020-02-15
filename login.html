@@ -8,7 +8,7 @@
 <div style="position: absolute; left: 50%; top: 50%;width: 400px; margin-left:-250px; margin-top: -200px">
     <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
    
-            <form action="login.php" method="post" name="Login">     
+            <form action="main.php" method="post" name="Login">     
                 <h2>Login System</h2>
                 <div>
                     <label style="display:inline-block;width:100px;">Username</label>
@@ -22,6 +22,7 @@
                 <br>
                 <div>
                     <input type="submit" value="Login" style="display:inline-block;width:100px;"> 
+                    <input type="hidden" name="function" id="function" value="login"> 
                     <input type="button" value="Sign up" onclick="javascrtpt:window.location.href='sign.html'" style="display:inline-block;width:100px;">
                 </div> 
             

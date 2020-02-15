@@ -1,4 +1,10 @@
 <?php
+require_once 'Counter.php';
+require_once 'CountListener.php';
+
+use \Main\ObserverPattern\Counter;
+use \Main\ObserverPattern\CountListener;
+
 // Set up variables for the database
 $dbServer = "mysql:3306";
 $dbName = "Users";
@@ -18,21 +24,34 @@ die("Connect Error (" . $mysqli->connect_errno . ")"
 . $mysqli->connect_error);
 }
 
-// You can use mysqli_select($connection, $dbname) to connect to another database if you need to.
-
+$func = $_POST['function'];
+$cookie = $_COOKIE["name"];
 $name = $_POST['username'];
-$pwd = $_POST['password'];
+$counter = new Counter(5);
+$observer = new CountListener($cookie);
+$counter->Attach($observer);
 
-if($name=='')
+switch($func)
 {
-    echo "<script>alert('Please enter username!');location='login.html'</script>";
+    case "login":
+    $name = $_POST['username'];
+    $pwd = $_POST['password'];
+    setcookie("name",$name,time()+3600);
+    $counter->Login(PreventSqlInjection($mysqli, $name), PreventSqlInjection($mysqli, $pwd), $mysqli);
+    break;
+    case "search":
+    $search = $_POST['search'];
+    $counter->Search($cookie, PreventSqlInjection($mysqli, $search), $mysqli);
+    break;
+    case "create":
+    $name = $_POST['username'];
+    $pwd = $_POST['password'];
+    $info = $_POST["information"];
+    $id = $_POST["id"];
+    $counter->Create(PreventSqlInjection($mysqli, $name), PreventSqlInjection($mysqli, $pwd), 
+        PreventSqlInjection($mysqli, $info), PreventSqlInjection($mysqli, $id), $mysqli);
+    break;
 }
-else if($pwd=='')
-{
-    echo "<script>alert('Please enter password!');location='login.html'</script>";
-}
-
-setcookie("name",$name,time()+3600);
 
 // Prevent hacker typing something nasty into a Form
 // and performing an SQL injection attack.

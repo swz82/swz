@@ -8,7 +8,7 @@
 <div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
     <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
    
-            <form action="create.php" method="post" name="Create">     
+            <form action="main.php" method="post" name="Create">     
                 <h2>Create a new account</h2>
                 <div>
                     <label style="display:inline-block;width:100px;">Username   </label>
@@ -33,6 +33,7 @@
                 </div>
                 </style>
                 <div style="position: absolute; left: 80%; top: 60%">
+                    <input type="hidden" name="function" id="function" value="create"> 
                     <input type="submit" value="Create" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
                 </div>            
             </form>

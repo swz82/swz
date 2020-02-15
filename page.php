@@ -21,6 +21,18 @@ if ($mysqli->connect_error)
        . $mysqli->connect_error);
 }
 
+$date = date('Y-m-d h:i:s', time());
+$log = $mysqli->query(
+    "INSERT INTO Log(name, log, time) VALUES(" 
+    . "'" . PreventSqlInjection($mysqli, $id)
+    . "', 'search for " . PreventSqlInjection($mysqli, $name)
+    . "' , '{$date}' )"
+  );
+if($log == false)
+{
+ die("Query contains error");
+ 
+}
 
 $keys = $mysqli->query("SELECT * FROM Students WHERE username LIKE '" . PreventSqlInjection($mysqli, $id) . "'");
 if($keys == false)
