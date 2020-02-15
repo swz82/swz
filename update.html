@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body style="background: #1E9FFF">
+<div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
+    <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+   
+            <form action="update.php" method="post" name="Update">     
+                <h2>Update a user</h2>
+                <div>
+                    <label style="display:inline-block;width:100px;">Username   </label>
+                    <input type="text" name="username" id="username" placeholder="username" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                        <label style="display:inline-block;width:100px;">New name   </label>
+                        <input type="text" name="newname" id="newname" placeholder="newname" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <label style="display:inline-block;width:100px;">Password   </label>
+                    <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <label style="display:inline-block;width:100px;">Information</label>
+                    <input type="text" name="information" id="information" placeholder="information" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <input type="radio" name="id" id="1" value="user" checked>
+                    <label for "1" style="display:inline-block;width:70px;">user</label>
+                    <input type="radio" name="id" id="2" value="administrator">
+                    <label for "2" style="display:inline-block;width:70px;">administrator</label>
+                </div>
+                </style>
+                <div style="position: absolute; left: 80%; top: 60%">
+                    <input type="submit" value="Update" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
+                </div>            
+            </form>
+    
+    </div>
+</div>
+</body>
+</html>

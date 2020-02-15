@@ -1,5 +1,6 @@
 <?php
 $name=$_POST['search'];
+$id=$_COOKIE["name"];
 
 // Set up variables for the database
 $dbServer = "mysql:3306";
@@ -20,9 +21,26 @@ if ($mysqli->connect_error)
        . $mysqli->connect_error);
 }
 
+
+$keys = $mysqli->query("SELECT * FROM Students WHERE username LIKE '" . PreventSqlInjection($mysqli, $id) . "'");
+if($keys == false)
+{
+    die("Query contains error" . mysqli_error());
+    echo "<script>alert('Query contains error!');location='login.html'</script>";   
+}
+$key = mysqli_fetch_array($keys);
+if($key["id"]=="administrator")
+{
+    $flag=1;
+}
+else{
+    $flag=0;
+}
+
 if($name=="")
 {
-    echo "<script>alert('No result!');location='page.html'</script>";
+    if($flag==1){echo "<script>alert('No result!');location='welcomeA.html'</script>";}
+    else{echo "<script>alert('No result!');location='welcomeU.html'</script>";}
 }
 
 // Execute SQL query, for SELECT returns resource 
@@ -32,19 +50,22 @@ $records = $mysqli->query("SELECT * FROM Students WHERE
 if($records == false)
 {
     die("Query contains error" . mysqli_error());
-    echo "<script>alert('Query contains error!');location='login.html'</script>";   
+    if($flag==1){echo "<script>alert('Query contains error!');location='welcomeA.html'</script>";}
+    else{echo "<script>alert('Query contains error!');location='welcomeU.html'</script>";}
 }
 
 $record = mysqli_fetch_array($records);
 if($record==NULL)
 {
-    echo "<script>alert('No result!');location='page.html'</script>";
+    if($flag==1){echo "<script>alert('No result!');location='welcomeA.html'</script>";}
+    else{echo "<script>alert('No result!');location='welcomeU.html'</script>";}
 }
 else
 {
     echo " ". $record["id"]
         . " : name=" . $record["username"] 
-        . " info " . $record["information"] . "<br/>";
+        . " info: " . $record["information"] . "<br/>";
+    
 }
 
 while($record = mysqli_fetch_array($records))
@@ -52,6 +73,7 @@ while($record = mysqli_fetch_array($records))
     echo " ". $record["id"]
         . " : name=" . $record["username"] 
         . " info " . $record["information"] . "<br/>";	
+    
 }
 
 // Prevent hacker typing something nasty into a Form

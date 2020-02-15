@@ -30,6 +30,7 @@ class CountListener extends Objects implements IObserver
 	public function Log(IObservable $observable)
 	{
 		echo "User {$this->_id} just searched<br/>";
+		
 	}
 }
 ?>

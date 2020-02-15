@@ -12,6 +12,7 @@ class Counter extends Objects implements IObservable
 	private $_observers = [];
 	private $_count = 0;
 	private $_limit;
+	private $closed;
 	
 	// Constructor
 	public function __construct($limit)
@@ -23,25 +24,10 @@ class Counter extends Objects implements IObservable
 	// Getters and Setters
 	
 	// Methods
-	
 	public function Login($name, $pwd, $mysqli)
 	{
-		if($name=='')
-		{
-			echo "<script>alert('Please enter username!');location='login.html'</script>";
-		}
-
-		else if($pwd=='')
-		{
-			echo "<script>alert('Please enter password!');location='login.html'</script>";
-		}
-
-		// Execute SQL query, for SELECT returns resource 
-
-		// on true or false if error
 		$records = $mysqli->query("SELECT * FROM Students WHERE 
-		username LIKE '" . PreventSqlInjection($mysqli, $name) . "' 
-    	AND password LIKE '" . PreventSqlInjection($mysqli, $pwd) . "'");
+		username LIKE '{$name}' AND password LIKE '{$pwd}'");
 		if($records == false)
 		{
     		die("Query contains error" . mysqli_error());
@@ -64,28 +50,25 @@ class Counter extends Objects implements IObservable
   		    if($log == false)
  		    {
  		       die("Query contains error");
-   		 	}
+				
+			}
+				
  		    if($record["id"]=="administrator")
   		    {
-  		      echo "<script>alert('Success!');location='welcomeA.html'</script>";
+				echo "<script>alert('Success!');location='welcomeA.html'</script>";
+				return 1;
    		 	}
    		 	else
   		 	{
-  		      echo "<script>alert('Success!');location='welcomeU.html'</script>";
-   		 	}
-    
+				echo "<script>alert('Success!');location='welcomeU.html'</script>";
+				return 0;
+   		 	} 
 		}
+	}
 
-			
-		    // If using MySQL, escape special characters	
-		    return $mysqli->real_escape_string($text);
-		}
-
-		$closed = $mysqli->close();
-		if($closed == false)
-		{
-			die("Connection closed failed " . mysqli_error());
-		}
+	public function Update($name,$mysqli)
+	{
+		
 	}
 
 	public function Search()
@@ -130,12 +113,5 @@ class Counter extends Objects implements IObservable
 		
 	}
 
-	public function PreventSqlInjection($mysqli, $text)
-	{
-    	if (get_magic_quotes_gpc())		// Is magic quotes on? 
-  	    {
-  	    	$text = stripslashes($text);	// Remove the slashes added
-		}
-	}
 }
 ?>

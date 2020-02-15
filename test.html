@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body style="background: #1E9FFF">
+<div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
+    <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+        <h>Hello </h>
+            <script> 
+                function getCookie(name) 
+                {
+                    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+                    if (arr != null)
+                        return unescape(arr[2]);
+                    return null;
+                }               
+                alert(getCookie('arr'));
+            </script>
+        <div>
+            <label style="display:inline-block;width:100px;">number   </label>
+            <input type="text" name=getCookie('arr') id=getCookie('arr') placeholder=getCookie('arr') autocomplete="on">
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

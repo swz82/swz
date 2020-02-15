@@ -15,13 +15,13 @@ $dbPassword = "docker";
 $mysqli = new mysqli($dbServer, $dbUName, $dbPassword, $dbName);
 
 /*
- * This is the "official" OO way to do it,
- * BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
- */
+* This is the "official" OO way to do it,
+* BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
+*/
 if ($mysqli->connect_error) 
 {
-    die("Connect Error (" . $mysqli->connect_errno . ")" 
-       . $mysqli->connect_error);
+die("Connect Error (" . $mysqli->connect_errno . ")" 
+. $mysqli->connect_error);
 }
 
 // You can use mysqli_select($connection, $dbname) to connect to another database if you need to.
@@ -33,7 +33,6 @@ $counter = new Counter(5);
 $observer = new CountListener($name);
 $counter->Attach($observer);
 
-$counter->Login($name, $pwd, $mysqli);
 if($name=='')
 {
     echo "<script>alert('Please enter username!');location='login.html'</script>";
@@ -43,45 +42,8 @@ else if($pwd=='')
     echo "<script>alert('Please enter password!');location='login.html'</script>";
 }
 
-
-// Execute SQL query, for SELECT returns resource 
-// on true or false if error
-$records = $mysqli->query("SELECT * FROM Students WHERE 
-    username LIKE '" . PreventSqlInjection($mysqli, $name) . "' 
-    AND password LIKE '" . PreventSqlInjection($mysqli, $pwd) . "'");
-if($records == false)
-{
-    die("Query contains error" . mysqli_error());
-    echo "<script>alert('Query contains error!');location='login.html'</script>";   
-}
-
-$date = date('Y-m-d h:i:s', time());
-$record = mysqli_fetch_array($records);
-if($record==NULL)
-{
-    echo "<script>alert('Wrong password!');location='login.html'</script>";
-}
-else
-{
-    $log = $mysqli->query(
-        "INSERT INTO Log(name, log, time) VALUES(" 
-           . "'" . PreventSqlInjection($mysqli, $name)
-           . "', 'login' , '{$date}' )"
-         );
-    if($log == false)
-    {
-        die("Query contains error");
-    }
-    if($record["id"]=="administrator")
-    {
-        echo "<script>alert('Success!');location='welcomeA.html'</script>";
-    }
-    else
-    {
-        echo "<script>alert('Success!');location='welcomeU.html'</script>";
-    }
-    
-}
+$counter->Login(PreventSqlInjection($mysqli, $name), PreventSqlInjection($mysqli, $pwd), $mysqli);
+setcookie("name",$name,time()+3600);
 
 // Prevent hacker typing something nasty into a Form
 // and performing an SQL injection attack.
@@ -106,6 +68,7 @@ function PreventSqlInjection($mysqli, $text)
 $closed = $mysqli->close();
 if($closed == false)
 {
-	die("Connection closed failed " . mysqli_error());
+    die("Connection closed failed " . mysqli_error());
 }
+
 ?>
