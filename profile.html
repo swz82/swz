@@ -10,7 +10,9 @@
 		var password = getCookie("pwd");
 		document.getElementById("password").value=password;
 		var information = getCookie("info");
-		document.getElementById("area").value=information;
+		var info = information.replace(/\+/g, " ");
+		info = decodeURIComponent(info);
+		document.getElementById("area").value=info;
 	}
 	function getCookie(name)  
 	{
