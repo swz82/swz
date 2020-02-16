@@ -60,7 +60,7 @@ class Counter extends Objects implements IObservable
 	
 	public function Sign($name, $pwd, $info, $mysqli)
 	{
-		$this->Create($name, $name, $pwd, $info, "user", "sign up", 0, $mysqli);
+		$this->Create($name, $pwd, $info, "user", "sign up", 0, $mysqli);
 	}
 	
 	public function Search($id, $name, $mysqli)
@@ -107,7 +107,7 @@ class Counter extends Objects implements IObservable
 		else if($flag==1)
 		{
 			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
-			echo "--------------------------------------------------------------------------------------------------------------<br/>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
 			/*echo "<p style='display:inline-block;width: 200px'>| ID</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Password</p>";
@@ -117,7 +117,7 @@ class Counter extends Objects implements IObservable
 			$this->Space("user",20);
 			$this->Space("password",20);
 			$this->Space("information",30);echo "<br>";
-			echo "--------------------------------------------------------------------------------------------------------------<br/>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
 			/*$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
 			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
 			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
@@ -128,11 +128,11 @@ class Counter extends Objects implements IObservable
 			$this->Space($record['username'],20);
 			$this->Space($record['password'],20);
 			$this->Space($record['information'],30);echo "<br>";
-			echo "--------------------------------------------------------------------------------------------------------------<br/>";	
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";	
 		}else
 		{
 			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
-			echo "--------------------------------------------------------------------------------------<br>";	
+			echo "&nbsp;--------------------------------------------------------------------------------------<br>";	
 			/*echo "<p style='display:inline-block;width: 200px'>| ID</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";*/			
@@ -140,7 +140,7 @@ class Counter extends Objects implements IObservable
 			$this->Space("id",20);
 			$this->Space("user",20);
 			$this->Space("information",30);echo "<br>";
-			echo "--------------------------------------------------------------------------------------<br/>";
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
 			/*$id = $record['id'];$name = $record['username'];$info = $record['information'];
 			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
 			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
@@ -149,7 +149,7 @@ class Counter extends Objects implements IObservable
 			$this->Space($record['id'],20);
 			$this->Space($record['username'],20);
 			$this->Space($record['information'],30);echo "<br>";	
-			echo "--------------------------------------------------------------------------------------<br/>";
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
 		}
 
 		while($record = mysqli_fetch_array($records))
@@ -166,7 +166,7 @@ class Counter extends Objects implements IObservable
 				$this->Space($record['username'],20);
 				$this->Space($record['password'],20);
 				$this->Space($record['information'],30);echo "<br>";
-				echo "--------------------------------------------------------------------------------------------------------------<br/>";
+				echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
 			}else
 			{
 				/*$id = $record['id'];$name = $record['username'];$info = $record['information'];
@@ -177,12 +177,12 @@ class Counter extends Objects implements IObservable
 				$this->Space($record['id'],20);
 				$this->Space($record['username'],20);
 				$this->Space($record['information'],30);echo "<br>";
-				echo "--------------------------------------------------------------------------------------<br/>";
+				echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
 			}			
 		}
 	}
 
-	public function Create($id, $enteredName, $enteredPwd, $enteredInfo, $enteredId, $log, $flag, $mysqli)
+	public function Create($enteredName, $enteredPwd, $enteredInfo, $enteredId, $log, $flag, $mysqli)
 	{
 		$records = $mysqli->query("SELECT * FROM Students WHERE username LIKE '{$enteredName}'");
 		if($records == false)
@@ -214,7 +214,7 @@ class Counter extends Objects implements IObservable
 		}   
 	}
 	
-	public function Delete($id, $key, $mysqli)
+	public function Delete($key, $mysqli)
 	{
 		$result = $mysqli->query("DELETE FROM Students WHERE username = '{$key}'");
 		if($result == false)
@@ -257,6 +257,7 @@ class Counter extends Objects implements IObservable
 		}
 		else
 		{
+			if($enteredName==$id)setcookie("name",$enteredNew,time()+3600);
 			$this->Notify($mysqli, "update a user: {$enteredName}");
 			echo "<script>alert('Update success!');location='update.html'</script>";
 		}   
@@ -277,10 +278,212 @@ class Counter extends Objects implements IObservable
 		}   
 	}
 	
-	public function Logout($id, $mysqli)
+	public function Logout($mysqli)
 	{
 		$this->Notify($mysqli, "logout");
 		echo "<script>alert('You have been logged out!');location='login.html'</script>";		
+	}
+	
+	public function SearchG($name, $mysqli)
+	{
+		$this->Notify($mysqli, "search grades for {$name}");
+		
+		if($name=="") echo "<script>alert('No result!');location='welcomeA.html'</script>";
+		
+		// Execute SQL query, for SELECT returns resource 
+		// on true or false if error
+		$records = $mysqli->query("SELECT * FROM Grades WHERE name LIKE '%{$name}%'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='welcomeA.html'</script>";
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record==NULL)
+		{
+			echo "<script>alert('No result!');location='welcomeA.html'</script>";
+		}else
+		{
+			echo "<p style='color:#6600FF; font-size:30px;'>Grades Search Result</p>";
+			echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+			/*echo "<p style='display:inline-block;width: 200px'>| Name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Math</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Art </p>|";
+			echo "<p style='display:inline-block;width: 200px'>| Science </p>|";
+			echo "<p style='display:inline-block;width: 300px'>| Feedback </p>|";*/			
+			echo "|";
+			$this->Space("name",20);
+			$this->Space("math",20);
+			$this->Space("art",20);
+			$this->Space("science",20);
+			$this->Space("feedback",30);echo "<br>";
+			echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+			/*$name = $record['name'];$math = $record['math'];$art = $record['art'];$science = $record['science'];$feedback = $record['feedback'];
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $math</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $art </p>|";
+			echo "<p style='display:inline-block;width: 200px'>| $science </p>|";
+			echo "<p style='display:inline-block;width: 200px'>| $feedback </p>|";*/
+			echo "|";
+			$this->Space($record['name'],20);
+			$this->Space($record['math'],20);
+			$this->Space($record['art'],20);
+			$this->Space($record['science'],20);
+			$this->Space($record['feedback'],30);echo "<br>";
+			echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+		}
+
+		while($record = mysqli_fetch_array($records))
+		{
+			/*$name = $record['name'];$math = $record['math'];$art = $record['art'];$science = $record['science'];$feedback = $record['feedback'];
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $math</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $art </p>|";
+			echo "<p style='display:inline-block;width: 200px'>| $science </p>|";
+			echo "<p style='display:inline-block;width: 200px'>| $feedback </p>|";*/
+			echo "|";
+			$this->Space($record['name'],20);
+			$this->Space($record['math'],20);
+			$this->Space($record['art'],20);
+			$this->Space($record['science'],20);
+			$this->Space($record['feedback'],30);echo "<br>";
+			echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+		}
+	}
+	
+	public function SearchS($id, $name, $mysqli)
+	{
+		$this->Notify($mysqli, "search for {$name} grade");
+		
+		if($name=="") echo "<script>alert('No result!');location='welcomeU.html'</script>";
+		
+		// Execute SQL query, for SELECT returns resource 
+		// on true or false if error
+		$records = $mysqli->query("SELECT {$name} FROM Grades WHERE name LIKE '{$id}'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='welcomeU.html'</script>";
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record==NULL)
+		{
+			echo "<script>alert('No result!');location='welcomeU.html'</script>";
+		}else
+		{
+			if($name=="*")
+			{
+				echo "<p style='color:#6600FF; font-size:30px;'>Grades Search Result</p>";
+				echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+				/*echo "<p style='display:inline-block;width: 200px'>| Name</p>";
+				echo "<p style='display:inline-block;width: 200px'>| Math</p>";
+				echo "<p style='display:inline-block;width: 200px'>| Art </p>|";
+				echo "<p style='display:inline-block;width: 200px'>| Science </p>|";
+				echo "<p style='display:inline-block;width: 300px'>| Feedback </p>|";*/				
+				echo "|";
+				$this->Space("name",20);
+				$this->Space("math",20);
+				$this->Space("art",20);
+				$this->Space("science",20);
+				$this->Space("feedback",30);echo "<br>";
+				echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+				/*$name = $record['name'];$math = $record['math'];$art = $record['art'];$science = $record['science'];$feedback = $record['feedback'];
+				echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+				echo "<p style='display:inline-block;width: 200px'>| $math</p>";
+				echo "<p style='display:inline-block;width: 200px'>| $art </p>|";
+				echo "<p style='display:inline-block;width: 200px'>| $science </p>|";
+				echo "<p style='display:inline-block;width: 200px'>| $feedback </p>|";*/
+				echo "|";
+				$this->Space($record['name'],20);
+				$this->Space($record['math'],20);
+				$this->Space($record['art'],20);
+				$this->Space($record['science'],20);
+				$this->Space($record['feedback'],30);echo "<br>";
+				echo "&nbsp;----------------------------------------------------------------------------------------------------------------------------------------<br>";	
+			}else
+			{
+				echo "<p style='color:#6600FF; font-size:30px;'>Grades Search Result</p>";
+				echo "<br> {$name} : {$record[$name]} ";
+			}
+		}
+	}
+	
+	public function CreateG($name, $math, $art, $science, $feedback, $log, $mysqli)
+	{
+		$records = $mysqli->query("SELECT * FROM Grades WHERE name LIKE '{$name}'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='createG.html'</script>";
+			return ;
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record!=NULL)
+		{
+			$this->Notify($mysqli, "submit failed");
+			echo "<script>alert('User already have grades!');location='createG.html'</script>";
+			return ;
+		}
+		
+		$result = $mysqli->query("INSERT INTO Grades(name, math, art, science,feedback) 
+			VALUES('{$name}','{$math}','{$art}','{$science}','{$feedback}')");
+		if($result == false)
+		{
+			die("Query contains error");
+		}
+		else
+		{
+			$this->Notify($mysqli, $log);
+			echo "<script>alert('Submit success!');location='createG.html'</script>";
+		}   
+	}
+	
+	public function DeleteG($key, $mysqli)
+	{
+		$result = $mysqli->query("DELETE FROM Grades WHERE name = '{$key}'");
+		if($result == false)
+		{
+			die("Query contains error");
+		}
+		else
+		{
+			$this->Notify($mysqli, "delete a grade for {$key}");
+			echo "<script>alert('Delete success!');location='deleteG.html'</script>";
+		}   
+	}
+	
+	public function UpdateG($name, $math, $art, $science, $feedback, $mysqli)
+	{	
+		$records = $mysqli->query("SELECT * FROM Grades WHERE name LIKE '{$name}'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='updateG.html'</script>";
+			return ;
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record==NULL)
+		{
+			$this->Notify($mysqli, "update failed");
+			echo "<script>alert('Record not exists!');location='updateG.html'</script>";
+			return ;
+		}
+		
+		$result = $mysqli->query("UPDATE Grades SET math = '{$math}', art = '{$art}', 
+			science = '{$science}' , feedback = '{$feedback}' WHERE name = '{$name}'");
+		if($result == false)
+		{
+			die("Query contains error");
+		}
+		else
+		{			
+			$this->Notify($mysqli, "update a grade for {$name}");
+			echo "<script>alert('Update success!');location='updateG.html'</script>";
+		}   
 	}
 	
 	public function Attach(IObserver $observer)
@@ -316,11 +519,15 @@ class Counter extends Objects implements IObservable
 		$txt = str_replace("-w","w",$txt);		
 		
 		$txt = str_replace("i","+i",$txt);
+		$txt = str_replace("t","+t",$txt);
+		$txt = str_replace("j","+j",$txt);
 		$txt = str_replace(".","+.",$txt);
 		$txt = str_replace(",","+,",$txt);
 		$txt = str_replace("'","+'",$txt);
 		$len = strlen($txt);
 		$txt = str_replace("+i","i",$txt);
+		$txt = str_replace("+t","t",$txt);
+		$txt = str_replace("+j","j",$txt);
 		$txt = str_replace("+.",".",$txt);
 		$txt = str_replace("+,",",",$txt);
 		$txt = str_replace("+'","'",$txt);

@@ -23,7 +23,7 @@
 		<br>
 		<div style="position: absolute; left: 50%; top: 50%;width: 400px; margin-left:-250px; margin-top: -200px">
 			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
-				<b>Student Management System</b>
+				<b>Student User Management System</b>
 				<br>
 				<br>
 				<form action="main.php" method="post" name="Search"> 
@@ -35,6 +35,22 @@
 				<input type="button" value="Create" onclick="javascrtpt:window.location.href='create.html'" style="display:inline-block;width:100px;">
 				<input type="button" value="Delete" onclick="javascrtpt:window.location.href='delete.html'" style="display:inline-block;width:100px;">
 				<input type="button" value="Update" onclick="javascrtpt:window.location.href='update.html'" style="display:inline-block;width:100px;">
+			</div>
+		</div>
+		<div style="position: absolute; left: 50%; top: 80%;width: 400px; margin-left:-250px; margin-top: -200px">
+			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+				<b>Student Grade Management System</b>
+				<br>
+				<br>
+				<form action="main.php" method="post" name="SearchG"> 
+					<input type="text" name="searchG" id="searchG" placeholder="username" autocomplete="off" style="display:inline-block;width:230px;">
+					<input type="hidden" name="function" id="function" value="searchG"> 
+					<input type="submit" value="Search">
+				</form>
+				<br>
+				<input type="button" value="Create" onclick="javascrtpt:window.location.href='createG.html'" style="display:inline-block;width:100px;">
+				<input type="button" value="Delete" onclick="javascrtpt:window.location.href='deleteG.html'" style="display:inline-block;width:100px;">
+				<input type="button" value="Update" onclick="javascrtpt:window.location.href='updateG.html'" style="display:inline-block;width:100px;">
 			</div>
 		</div>
     </body>

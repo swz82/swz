@@ -23,16 +23,35 @@
 		<br>
 		<div style="position: absolute; left: 50%; top: 50%;width: 400px; margin-left:-250px; margin-top: -200px">
 			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
-				<b>Student Search and Profile System</b>
+				<b>Student User Search System</b>
 				<br>
 				<br>
 				<form action="main.php" method="post" name="Search"> 
-					<input type="text" name="search" id="search" placeholder="search" autocomplete="off" style="display:inline-block;width:230px;">
+					<input type="text" name="search" id="search" placeholder="search" autocomplete="off" style="display:inline-block;width:270px;">
 					<input type="hidden" name="function" id="function" value="search"> 
 					<input type="submit" name="submit" id="submit" value="Search">
 				</form>
+			</div>
+		</div>
+		<div style="position: absolute; left: 50%; top: 72%;width: 400px; margin-left:-250px; margin-top: -200px">
+			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
 				<br>
-				<input type="button" value="Profile" onclick="javascrtpt:window.location.href='profile.html'" style="display:inline-block;width:100px;">
+				<input type="image" src="profile.png" onclick="javascrtpt:window.location.href='profile.html'" style="position: absolute;left: 10%; top: 22%;width: 50px; height:50px">
+				<label style="position: absolute;left: 30%; top: 35%;width: 200px; height:50px">Manage your profile</label>
+				<br>
+			</div>
+		</div>
+		<div style="position: absolute; left: 50%; top: 90%;width: 400px; margin-left:-250px; margin-top: -200px">
+			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+				<b>Grade Search System</b>
+				<br>
+				<br>
+				<form action="main.php" method="post" name="SearchS"> 
+					<input type="text" name="searchS" id="searchS" placeholder="course name (search * to see all courses)" autocomplete="off" 
+						style="display:inline-block;width:270px;">
+					<input type="hidden" name="function" id="function" value="searchS"> 
+					<input type="submit" value="Search">
+				</form>
 			</div>
 		</div>
     </body>

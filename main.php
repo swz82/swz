@@ -88,12 +88,12 @@ switch($func)
 	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
 	$info = PreventSqlInjection($mysqli, $_POST["information"]);
     $id = PreventSqlInjection($mysqli, $_POST["id"]);
-    $counter->Create($cookie, $name, $pwd, $info, $id, "create a user: {$name}", 1, $mysqli);
+    $counter->Create($name, $pwd, $info, $id, "create a user: {$name}", 1, $mysqli);
     break;
 	
 	case "delete":
     $key = PreventSqlInjection($mysqli, $_POST['username']);
-    $counter->Delete($cookie, $key, $mysqli);
+    $counter->Delete($key, $mysqli);
     break;
 	
 	case "update":
@@ -112,7 +112,40 @@ switch($func)
     break;
 	
 	case "logout":
-    $counter->Logout($cookie, $mysqli);
+    $counter->Logout($mysqli);
+    break;
+	
+	case "searchG":
+    $search = PreventSqlInjection($mysqli, $_POST['searchG']);
+    $counter->SearchG($search, $mysqli);
+    break;
+	
+	case "searchS":
+    $search = PreventSqlInjection($mysqli, $_POST['searchS']);
+    $counter->SearchS($cookie, $search, $mysqli);
+    break;
+	
+	case "createG":
+    $name = PreventSqlInjection($mysqli, $_POST["name"]);
+	$math = PreventSqlInjection($mysqli, $_POST["math"]);
+	$art = PreventSqlInjection($mysqli, $_POST["art"]);
+    $science = PreventSqlInjection($mysqli, $_POST["science"]);
+	$feedback = PreventSqlInjection($mysqli, $_POST["feedback"]);
+    $counter->CreateG($name, $math, $art, $science, $feedback, "submit a grade for {$name}", $mysqli);
+    break;
+	
+	case "deleteG":
+    $key = PreventSqlInjection($mysqli, $_POST['name']);
+    $counter->DeleteG($key, $mysqli);
+    break;
+	
+	case "updateG":
+    $name = PreventSqlInjection($mysqli, $_POST["name"]);
+	$math = PreventSqlInjection($mysqli, $_POST["math"]);
+	$art = PreventSqlInjection($mysqli, $_POST["art"]);
+    $science = PreventSqlInjection($mysqli, $_POST["science"]);
+	$feedback = PreventSqlInjection($mysqli, $_POST["feedback"]);
+    $counter->UpdateG($name, $math, $art, $science, $feedback, $mysqli);
     break;
 }
 

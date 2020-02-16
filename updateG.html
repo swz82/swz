@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<script>
+	function copy()
+	{
+		document.getElementById('feedback').value=document.getElementById('area').value;
+	}
+    function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("submit").click();
+		}
+    };
+</script>
+<body style="background: #FF3333" onkeydown="keyLogin()">
+<div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
+    <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+   
+            <form action="main.php" method="post" name="Submit" onsubmit="copy()">     
+                <h2>Update a grade record</h2>
+				<br>
+				<div>
+                    <label style="display:inline-block;width:100px;">Name   </label>
+                    <input type="text" name="name" id="name" placeholder="name" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <label style="display:inline-block;width:100px;">Math   </label>
+                    <input type="text" name="math" id="math" placeholder="math" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <label style="display:inline-block;width:100px;">Art   </label>
+                    <input type="text" name="art" id="art" placeholder="art" autocomplete="off">
+                </div>
+				<br>
+				<div>
+                    <label style="display:inline-block;width:100px;">Science   </label>
+                    <input type="text" name="science" id="science" placeholder="science" autocomplete="off">
+                </div>
+                <br>
+                <div>
+                    <label style="display:inline-block;width:100px;margin-top: 5px">Feedback</label>
+					<textarea cols="20" rows="4" id="area" style="position: absolute;margin-left: 5px"></textarea>
+                    <input type="hidden" name="feedback" id="feedback">
+                </div>
+                <div style="position: absolute; left: 80%; top: 60%">
+                    <input type="hidden" name="function" id="function" value="updateG"> 
+                    <input type="submit" id="update" name="update" id="update" value="Update" onClick="return confirm('Are you sure you want to update this record?')"
+						style="position: absolute; margin-left:-25px; margin-top: -30px; width: 70px">
+					<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='welcomeA.html'" 
+						style="position: absolute; margin-left:-25px; margin-top: 10px; width: 70px">
+                </div>           
+				<br>
+				<br>
+            </form>
+    
+    </div>
+</div>
+</body>
+</html>
