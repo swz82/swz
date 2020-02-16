@@ -6,10 +6,10 @@ use \Main\ObserverPattern\Counter;
 use \Main\ObserverPattern\CountListener;
 
 // Set up variables for the database
-$dbServer = "mysql:3306";
-$dbName = "Users";
+$dbServer = "localhost";
+$dbName = "users";
 $dbUName = "root";
-$dbPassword = "docker";
+$dbPassword = "";
 
 // Open a connection to the database server
 $mysqli = new mysqli($dbServer, $dbUName, $dbPassword, $dbName);
@@ -25,31 +25,94 @@ die("Connect Error (" . $mysqli->connect_errno . ")"
 }
 
 $func = $_POST['function'];
-$cookie = $_COOKIE["name"];
-$name = $_POST['username'];
-$counter = new Counter(5);
-$observer = new CountListener($cookie);
-$counter->Attach($observer);
+
+if($func!="login"&&$func!="sign")
+{
+	$cookie = $_COOKIE["name"];
+	$counter = new Counter(5);
+	$observer = new CountListener($cookie);
+	$counter->Attach($observer);
+}
+
 
 switch($func)
 {
-    case "login":
-    $name = $_POST['username'];
-    $pwd = $_POST['password'];
-    setcookie("name",$name,time()+3600);
-    $counter->Login(PreventSqlInjection($mysqli, $name), PreventSqlInjection($mysqli, $pwd), $mysqli);
-    break;
+	case "login":
+	$enteredName = $_POST['username'];
+	$enteredPwd = $_POST['password'];
+	if($enteredName=='')
+	{
+		echo "<script>alert('Please enter username!');location='login.html'</script>";
+	}
+	else if($enteredPwd=='')
+	{
+		echo "<script>alert('Please enter password!');location='login.html'</script>";
+	}
+	$name = PreventSqlInjection($mysqli, $_POST["username"]);
+	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
+	$counter = new Counter(5);
+	$observer = new CountListener($enteredName);
+	$counter->Attach($observer);
+	$counter->Login($name, $pwd,  $mysqli);
+	break;
+	
+	case "sign":
+	$enteredName = $_POST["username"];   
+	$enteredPwd = $_POST["password"];
+	$enteredInfo = $_POST["information"];
+	if($enteredName=='')
+	{
+		echo "<script>alert('Please enter username!');location='sign.html'</script>";
+	}
+	else if($enteredPwd=='')
+	{
+		echo "<script>alert('Please enter password!');location='sign.html'</script>";
+	}
+	$name = PreventSqlInjection($mysqli, $_POST["username"]);
+	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
+	$info = PreventSqlInjection($mysqli, $_POST["information"]);
+	$counter = new Counter(5);
+	$observer = new CountListener($name);
+	$counter->Attach($observer);
+	$counter->Sign($name, $pwd, $info, $mysqli);
+	$counter->Login($name, $pwd,  $mysqli);
+	break;
+	
     case "search":
-    $search = $_POST['search'];
-    $counter->Search($cookie, PreventSqlInjection($mysqli, $search), $mysqli);
+    $search = PreventSqlInjection($mysqli, $_POST['search']);
+    $counter->Search($cookie, $search, $mysqli);
     break;
+	
     case "create":
-    $name = $_POST['username'];
-    $pwd = $_POST['password'];
-    $info = $_POST["information"];
-    $id = $_POST["id"];
-    $counter->Create(PreventSqlInjection($mysqli, $name), PreventSqlInjection($mysqli, $pwd), 
-        PreventSqlInjection($mysqli, $info), PreventSqlInjection($mysqli, $id), $mysqli);
+    $name = PreventSqlInjection($mysqli, $_POST["username"]);
+	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
+	$info = PreventSqlInjection($mysqli, $_POST["information"]);
+    $id = PreventSqlInjection($mysqli, $_POST["id"]);
+    $counter->Create($cookie, $name, $pwd, $info, $id, "create a user: {$name}", 1, $mysqli);
+    break;
+	
+	case "delete":
+    $key = PreventSqlInjection($mysqli, $_POST['username']);
+    $counter->Delete($cookie, $key, $mysqli);
+    break;
+	
+	case "update":
+    $name = PreventSqlInjection($mysqli, $_POST["username"]);
+	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
+	$info = PreventSqlInjection($mysqli, $_POST["information"]);
+    $id = PreventSqlInjection($mysqli, $_POST["id"]);
+	$new = PreventSqlInjection($mysqli, $_POST["newname"]);
+    $counter->Update($cookie, $name, $pwd, $info, $id, $new, $mysqli);
+    break;
+	
+	case "profile":
+	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
+	$info = PreventSqlInjection($mysqli, $_POST["information"]);
+    $counter->Profile($cookie, $pwd, $info, $mysqli);
+    break;
+	
+	case "logout":
+    $counter->Logout($cookie, $mysqli);
     break;
 }
 

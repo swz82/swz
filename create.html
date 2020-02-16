@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <title>Create</title>
 </head>
-<body style="background: #1E9FFF">
+<script>
+	function copy()
+	{
+		document.getElementById('information').value=document.getElementById('area').value;
+	}
+    function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("submit").click();
+		}
+    };
+</script>
+<body style="background: #FF3333" onkeydown="keyLogin()">
 <div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
     <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
    
-            <form action="main.php" method="post" name="Create">     
+            <form action="main.php" method="post" name="Create" onsubmit="copy()">     
                 <h2>Create a new account</h2>
                 <div>
                     <label style="display:inline-block;width:100px;">Username   </label>
@@ -21,10 +32,13 @@
                 </div>
                 <br>
                 <div>
-                    <label style="display:inline-block;width:100px;">Information</label>
-                    <input type="text" name="information" id="information" placeholder="information" autocomplete="off">
+                    <label style="display:inline-block;width:100px;margin-top: 5px">Information</label>
+					<textarea cols="20" rows="4" id="area" style="position: absolute;margin-left: 5px"></textarea>
+                    <input type="hidden" name="information" id="information">
                 </div>
                 <br>
+				<br>
+				<br>
                 <div>
                     <input type="radio" name="id" id="1" value="user" checked>
                     <label for "1" style="display:inline-block;width:70px;">user</label>
@@ -34,7 +48,10 @@
                 </style>
                 <div style="position: absolute; left: 80%; top: 60%">
                     <input type="hidden" name="function" id="function" value="create"> 
-                    <input type="submit" value="Create" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
+                    <input type="submit" id="submit" name="submit" id="submit"value="Create" onClick="return confirm('Are you sure you want to create this user?')"
+					style="position: absolute; margin-left:-25px; margin-top: -30px; width: 70px">
+					<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='welcomeA.html'" 
+						style="position: absolute; margin-left:-25px; margin-top: 10px; width: 70px">
                 </div>            
             </form>
     

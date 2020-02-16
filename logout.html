@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+</head>
+<script type="text/javascript">
+    function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("submit").click();
+		}
+    };
+</script>
+<body style="background: #C0C0C0" onkeydown="keyLogin()">
+<div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
+    <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+   
+            <form action="main.php" method="post" name="Create">     
+                <h2>Are you sure you want to logout?</h2>
+                <form action="main.php" method="post" name="Search"> 
+					<input type="submit" id="submit" value="Yes" style="width: 150px">
+					<input type="button" onclick="javascript :history.back(-1)" value="No" style="width: 150px"> 
+					<input type="hidden" name="function" id="function" value="logout">					
+				</form>       
+            </form>
+    
+    </div>
+</div>
+</body>
+</html>

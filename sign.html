@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <title>Create</title>
 </head>
-<body style="background: #1E9FFF">
+<script>
+	function copy()
+	{
+		document.getElementById('information').value=document.getElementById('area').value;
+	}
+	function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("submit").click();
+		}
+    };
+</script>
+<body style="background: #1E9FFF" onkeydown="keyLogin()">
 <div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
-    <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+    <div style="background: #FFFFFF; height: 230px; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
    
-            <form action="sign.php" method="post" name="Create">     
+            <form action="main.php" method="post" name="Create" onsubmit="copy()">     
                 <h2>Create a new account</h2>
                 <div>
                     <label style="display:inline-block;width:100px;">Username   </label>
@@ -21,13 +32,15 @@
                 </div>
                 <br>
                 <div>
-                    <label style="display:inline-block;width:100px;">Information</label>
-                    <input type="text" name="information" id="information" placeholder="information" autocomplete="off">
+                    <label style="display:inline-block;width:100px;margin-top: 5px">Information</label>
+					<textarea cols="20" rows="4" id="area" style="position: absolute;margin-left: 5px"></textarea>
+                    <input type="hidden" name="information" id="information">
                 </div>
                 <br>
                 </style>
                 <div style="position: absolute; left: 80%; top: 60%">
-                    <input type="submit" value="Create" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
+					<input type="hidden" name="function" id="function" value="sign">
+                    <input type="submit" id="submit" value="Create" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
                 </div>            
             </form>
     

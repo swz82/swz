@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-   <body>
-   <h1>Welcome Administrator!</h1>
-   <br>
-
-   <div>
-      <form action="main.php" method="post" name="Search"> 
-         <input type="text" name="search" id="search" placeholder="search" autocomplete="off">
-         <input type="hidden" name="function" id="function" value="search"> 
-         <input type="submit" value="Search">
-      </form>
-   </div>
-   <br>
-   <div>
-        <input type="button" value="Create" onclick="javascrtpt:window.location.href='create.html'">
-    </div>
-    <br>
-    <div>
-         <input type="button" value="Delete" onclick="javascrtpt:window.location.href='delete.html'">
-     </div>
-     <br>
-    <div>
-        <input type="button" value="Update" onclick="javascrtpt:window.location.href='update.html'">
-    </div>
-    <br>
-   </body>
+    <script type="text/javascript">
+		window.onload=function init()
+		{
+			var username = getCookie("name");
+			document.getElementById("user").value=username;
+		}
+		function getCookie(name)  
+		{
+			var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+			if(arr != null) return (arr[2]); return null;
+		}
+	</script>
+    <body style="background: #1FFFFF">
+		<input type="image" onclick="javascrtpt:window.location.href='logout.html'" src="image1.png"
+			style="position: absolute; left: 90%; top: 4% ; width: 50px; height:50px">
+		<h1>Welcome,   
+			<input id="user" placeholder="administrator" style="background: #1FFFFF;height:42px;font-size:42px;border-style:none">
+		</h1>
+		<br>
+		<br>
+		<br>
+		<div style="position: absolute; left: 50%; top: 50%;width: 400px; margin-left:-250px; margin-top: -200px">
+			<div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
+				<b>Student Management System</b>
+				<br>
+				<br>
+				<form action="main.php" method="post" name="Search"> 
+					<input type="text" name="search" id="search" placeholder="search" autocomplete="off" style="display:inline-block;width:230px;">
+					<input type="hidden" name="function" id="function" value="search"> 
+					<input type="submit" value="Search">
+				</form>
+				<br>
+				<input type="button" value="Create" onclick="javascrtpt:window.location.href='create.html'" style="display:inline-block;width:100px;">
+				<input type="button" value="Delete" onclick="javascrtpt:window.location.href='delete.html'" style="display:inline-block;width:100px;">
+				<input type="button" value="Update" onclick="javascrtpt:window.location.href='update.html'" style="display:inline-block;width:100px;">
+			</div>
+		</div>
+    </body>
 </html>

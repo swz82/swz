@@ -4,15 +4,34 @@
     <meta charset="UTF-8">
     <title>Profile</title>
 </head>
-<body style="background: #1E9FFF">
+<script type="text/javascript">
+	window.onload=function init()
+	{
+		var password = getCookie("pwd");
+		document.getElementById("password").value=password;
+		var information = getCookie("info");
+		document.getElementById("area").value=information;
+	}
+	function getCookie(name)  
+	{
+		var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+		if(arr != null) return (arr[2]); return null;
+	}
+	function copy()
+	{
+		document.getElementById('information').value=document.getElementById('area').value;
+	}
+    function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("submit").click();
+		}
+    };
+</script>
+<body style="background: #FFFF33" onkeydown="keyLogin()">
 <div style="position: absolute; left: 50%; top: 50%;width: 500px; margin-left:-250px; margin-top: -200px">
     <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
-            <form action="profile.php" method="post" name="Create">     
+            <form action="main.php" method="post" name="Profile" onsubmit="copy()">     
             <h2>Update your profile</h2>
-            <div>
-                <label style="display:inline-block;width:100px;">Username   </label>
-                <input type="text" name="username" id="username" placeholder="username" autocomplete="on">
-            </div>
             <br>
             <div>
                 <label style="display:inline-block;width:100px;">Password   </label>
@@ -20,14 +39,20 @@
             </div>
             <br>
             <div>
-                <label style="display:inline-block;width:100px;">Information</label>
-                <input type="text" name="information" id="information" placeholder="information" autocomplete="on">
+                <label style="display:inline-block;width:100px;margin-top: 5px">Information</label>
+					<textarea cols="20" rows="4" id="area" style="position: absolute;margin-left: 5px"></textarea>
+                    <input type="hidden" name="information" id="information">
             </div>
             <br>
             </style>
             <div style="position: absolute; left: 80%; top: 60%">
-                <input type="submit" value="Submit" style="position: absolute; left: 70%; top: 60% width: 50px; margin-left:-25px; margin-top: -20px">
-            </div>            
+				<input type="hidden" name="function" id="function" value="profile">
+                <input type="submit" id="submit" value="Submit" onClick="return confirm('Are you sure you want to update your profile?')"
+					style="position: absolute; margin-left:-25px; margin-top: -30px; width: 70px">
+					<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='welcomeU.html'" 
+						style="position: absolute; margin-left:-25px; margin-top: 10px; width: 70px">
+            </div>    
+			<br>
         </form>
     
     </div>

@@ -7,6 +7,6 @@ interface IObservable
 {
 	public function Attach(IObserver $observer);
 	public function Detach(IObserver $observer);
-	public function Notify();
+	public function Notify($mysqli, $log);
 }
 ?>

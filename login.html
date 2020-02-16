@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
-<body style="background: #1E9FFF">
+<script type="text/javascript">
+    function keyLogin(){
+		if (event.keyCode==13){
+			document.getElementById("login").click();
+		}
+    };
+</script>
+<body style="background: #1E9FFF" onkeydown="keyLogin()">
 <div style="position: absolute; left: 50%; top: 50%;width: 400px; margin-left:-250px; margin-top: -200px">
     <div style="background: #FFFFFF; padding: 20px;border-radius: 4px;box-shadow: 5px 5px 20px #444444" >
    
@@ -21,8 +28,8 @@
                 </div>
                 <br>
                 <div>
-                    <input type="submit" value="Login" style="display:inline-block;width:100px;"> 
-                    <input type="hidden" name="function" id="function" value="login"> 
+					<input type="hidden" name="function" id="function" value="login">
+                    <input type="submit" id="login" value="Login" style="display:inline-block;width:100px;"> 
                     <input type="button" value="Sign up" onclick="javascrtpt:window.location.href='sign.html'" style="display:inline-block;width:100px;">
                 </div> 
             

@@ -22,14 +22,32 @@ class CountListener extends Objects implements IObserver
 	
 	// Methods
 	
-	public function Update(IObservable $observable)
+	public function Update(IObservable $observable, $mysqli, $log)
 	{
-		echo "User {$this->_id} just logged in<br/>";
+		$date = date('Y-m-d h:i:s', time());
+		$log = $mysqli->query(
+			"INSERT INTO Log(name, log, time) VALUES(" 
+			. "'{$this->_id}', '{$log}' , '{$date}' )"
+		);
+		if($log == false)
+		{
+			die("Query contains error");		
+		}
 	}
-
-	public function Log(IObservable $observable)
+	
+	public function Update2(IObservable $observable, $id, $mysqli, $log)
 	{
-		echo "User {$this->_id} just searched<br/>";		
+		$date = date('Y-m-d h:i:s', time());
+		$log = $mysqli->query(
+			"INSERT INTO Log(name, log, time) VALUES(" 
+			. "'" . PreventSqlInjection($mysqli, $id)
+			. "', '{$log}' , '{$date}' )"
+		);
+		if($log == false)
+		{
+			die("Query contains error");		
+		}
 	}
+	
 }
 ?>
