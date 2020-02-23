@@ -76,7 +76,7 @@ switch($func)
 	$counter->Attach($observer);
 	if($name=='user'||$name=='administrator')
 	{
-		echo "<script>alert('Username could not be used!');location='create.html'</script>";
+		echo "<script>alert('Username could not be used!');location='sign.html'</script>";
 	}else
 	{
 		$counter->Sign($name, $pwd, $info, $mysqli);

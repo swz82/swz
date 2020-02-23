@@ -317,7 +317,7 @@ class Counter extends Objects implements IObservable
 		}   
 	}
 	
-	public function Update($id, $enteredNew, $enteredPwd, $enteredInfo, $enteredId, $enteredName, $mysqli)
+	public function Update($id, $enteredName, $enteredPwd, $enteredInfo, $enteredId, $enteredNew, $mysqli)
 	{
 		if($enteredName!=$enteredNew)
 		{
