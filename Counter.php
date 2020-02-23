@@ -108,47 +108,37 @@ class Counter extends Objects implements IObservable
 		{
 			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
 			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
-			/*echo "<p style='display:inline-block;width: 200px'>| ID</p>";
+			echo "<p style='display:inline-block;width: 200px'>| ID</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Password</p>";
-			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";*/			
-			echo "|";
-			$this->Space("id",20);
-			$this->Space("user",20);
-			$this->Space("password",20);
-			$this->Space("information",30);echo "<br>";
+			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";			
+			//echo "|";$this->Space("id",20);$this->Space("user",20);$this->Space("password",20);$this->Space("information",30);
+			echo "<br>";
 			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
-			/*$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
+			$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
 			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
 			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
 			echo "<p style='display:inline-block;width: 200px'>| $pwd</p>";
-			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";*/
-			echo "|";
-			$this->Space($record['id'],20);
-			$this->Space($record['username'],20);
-			$this->Space($record['password'],20);
-			$this->Space($record['information'],30);echo "<br>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['password'],20);$this->Space($record['information'],30);
+			echo "<br>";
 			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";	
 		}else
 		{
 			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
 			echo "&nbsp;--------------------------------------------------------------------------------------<br>";	
-			/*echo "<p style='display:inline-block;width: 200px'>| ID</p>";
+			echo "<p style='display:inline-block;width: 200px'>| ID</p>";
 			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
-			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";*/			
-			echo "|";
-			$this->Space("id",20);
-			$this->Space("user",20);
-			$this->Space("information",30);echo "<br>";
+			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";			
+			//echo "|";$this->Space("id",20);$this->Space("user",20);$this->Space("information",30);
+			echo "<br>";
 			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
-			/*$id = $record['id'];$name = $record['username'];$info = $record['information'];
+			$id = $record['id'];$name = $record['username'];$info = $record['information'];
 			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
 			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
-			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";*/
-			echo "|";
-			$this->Space($record['id'],20);
-			$this->Space($record['username'],20);
-			$this->Space($record['information'],30);echo "<br>";	
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['information'],30);
+			echo "<br>";	
 			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
 		}
 
@@ -156,28 +146,127 @@ class Counter extends Objects implements IObservable
 		{
 			if($flag==1)
 			{
-				/*$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
-				echo "<p style='display:inline-block;width: 200px'>| $id</p>";
-				echo "<p style='display:inline-block;width: 200px'>| $name</p>";
-				echo "<p style='display:inline-block;width: 200px'>| $pwd</p>";
-				echo "<p style='display:inline-block;width: 200px'>| $info</p>|";*/
-				echo "|";
-				$this->Space($record['id'],20);
-				$this->Space($record['username'],20);
-				$this->Space($record['password'],20);
-				$this->Space($record['information'],30);echo "<br>";
-				echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
+				$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $pwd</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['password'],20);$this->Space($record['information'],30);
+			echo "<br>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";	
 			}else
 			{
-				/*$id = $record['id'];$name = $record['username'];$info = $record['information'];
-				echo "<p style='display:inline-block;width: 200px'>|       $id</p>";
-				echo "<p style='display:inline-block;width: 200px'>|       $name</p>";
-				echo "<p style='display:inline-block;width: 200px'>|       $info</p>|";*/
-				echo "|";
-				$this->Space($record['id'],20);
-				$this->Space($record['username'],20);
-				$this->Space($record['information'],30);echo "<br>";
-				echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
+				$id = $record['id'];$name = $record['username'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['information'],30);
+			echo "<br>";	
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
+			}			
+		}
+	}
+
+	public function SearchID($id, $name, $mysqli)
+	{
+		$this->Notify($mysqli, "search for id: {$name}");
+		$keys = $mysqli->query("SELECT * FROM Students WHERE username LIKE '{$id}'");
+		if($keys == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='login.html'</script>";
+			return ;			
+		}
+		$key = mysqli_fetch_array($keys);
+		if($key["id"]=="administrator")
+		{
+			$flag=1;
+		}
+		else{
+			$flag=0;
+		}
+
+		if($name=="")
+		{
+			if($flag==1){echo "<script>alert('No result!');location='welcomeA.html'</script>";}
+			else{echo "<script>alert('No result!');location='welcomeU.html'</script>";}
+		}
+
+		// Execute SQL query, for SELECT returns resource 
+		// on true or false if error
+		$records = $mysqli->query("SELECT * FROM Students WHERE id LIKE '%{$name}%'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			if($flag==1){echo "<script>alert('Query contains error!');location='welcomeA.html'</script>";}
+			else{echo "<script>alert('Query contains error!');location='welcomeU.html'</script>";}
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record==NULL)
+		{
+			if($flag==1){echo "<script>alert('No result!');location='welcomeA.html'</script>";}
+			else{echo "<script>alert('No result!');location='welcomeU.html'</script>";}
+		}
+		else if($flag==1)
+		{
+			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
+			echo "<p style='display:inline-block;width: 200px'>| ID</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Password</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";			
+			//echo "|";$this->Space("id",20);$this->Space("user",20);$this->Space("password",20);$this->Space("information",30);
+			echo "<br>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";
+			$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $pwd</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['password'],20);$this->Space($record['information'],30);
+			echo "<br>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";	
+		}else
+		{
+			echo "<p style='color:#6600FF; font-size:30px;'>Student Search Result</p>";
+			echo "&nbsp;--------------------------------------------------------------------------------------<br>";	
+			echo "<p style='display:inline-block;width: 200px'>| ID</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Username</p>";
+			echo "<p style='display:inline-block;width: 200px'>| Information </p>|";			
+			//echo "|";$this->Space("id",20);$this->Space("user",20);$this->Space("information",30);
+			echo "<br>";
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
+			$id = $record['id'];$name = $record['username'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['information'],30);
+			echo "<br>";	
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
+		}
+
+		while($record = mysqli_fetch_array($records))
+		{
+			if($flag==1)
+			{
+				$id = $record['id'];$name = $record['username'];$pwd = $record['password'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $pwd</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['password'],20);$this->Space($record['information'],30);
+			echo "<br>";
+			echo "&nbsp;--------------------------------------------------------------------------------------------------------------<br/>";	
+			}else
+			{
+				$id = $record['id'];$name = $record['username'];$info = $record['information'];
+			echo "<p style='display:inline-block;width: 200px'>| $id</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $name</p>";
+			echo "<p style='display:inline-block;width: 200px'>| $info</p>|";
+			//echo "|";$this->Space($record['id'],20);$this->Space($record['username'],20);$this->Space($record['information'],30);
+			echo "<br>";	
+			echo "&nbsp;--------------------------------------------------------------------------------------<br/>";
 			}			
 		}
 	}
@@ -412,6 +501,22 @@ class Counter extends Objects implements IObservable
 	
 	public function CreateG($name, $math, $art, $science, $feedback, $log, $mysqli)
 	{
+		$keys = $mysqli->query("SELECT * FROM Students WHERE username LIKE '{$name}'");
+		if($keys == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='createG.html'</script>";
+			return ;
+		}
+
+		$key = mysqli_fetch_array($keys);
+		if($key == NULL)
+		{
+			$this->Notify($mysqli, "submit wrong user");
+			echo "<script>alert('User does not exist!');location='createG.html'</script>";
+			return ;
+		}
+		
 		$records = $mysqli->query("SELECT * FROM Grades WHERE name LIKE '{$name}'");
 		if($records == false)
 		{
@@ -421,9 +526,9 @@ class Counter extends Objects implements IObservable
 		}
 
 		$record = mysqli_fetch_array($records);
-		if($record!=NULL)
+		if($record != NULL)
 		{
-			$this->Notify($mysqli, "submit failed");
+			$this->Notify($mysqli, "submit grades failed");
 			echo "<script>alert('User already have grades!');location='createG.html'</script>";
 			return ;
 		}
@@ -468,7 +573,7 @@ class Counter extends Objects implements IObservable
 		$record = mysqli_fetch_array($records);
 		if($record==NULL)
 		{
-			$this->Notify($mysqli, "update failed");
+			$this->Notify($mysqli, "update grades failed");
 			echo "<script>alert('Record not exists!');location='updateG.html'</script>";
 			return ;
 		}

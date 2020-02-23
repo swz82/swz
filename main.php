@@ -74,13 +74,25 @@ switch($func)
 	$counter = new Counter(5);
 	$observer = new CountListener($name);
 	$counter->Attach($observer);
-	$counter->Sign($name, $pwd, $info, $mysqli);
-	$counter->Login($name, $pwd,  $mysqli);
+	if($name=='user'||$name=='administrator')
+	{
+		echo "<script>alert('Username could not be used!');location='create.html'</script>";
+	}else
+	{
+		$counter->Sign($name, $pwd, $info, $mysqli);
+		$counter->Login($name, $pwd,  $mysqli);
+	}
 	break;
 	
     case "search":
-    $search = PreventSqlInjection($mysqli, $_POST['search']);
-    $counter->Search($cookie, $search, $mysqli);
+    $search = PreventSqlInjection($mysqli, $_POST['search']);	
+	if($search=='user'||$search=='administrator')
+	{
+		$counter->SearchID($cookie, $search, $mysqli);
+	}else
+	{
+		$counter->Search($cookie, $search, $mysqli);
+	}
     break;
 	
     case "create":
@@ -88,7 +100,13 @@ switch($func)
 	$pwd = PreventSqlInjection($mysqli, $_POST["password"]);
 	$info = PreventSqlInjection($mysqli, $_POST["information"]);
     $id = PreventSqlInjection($mysqli, $_POST["id"]);
-    $counter->Create($name, $pwd, $info, $id, "create a user: {$name}", 1, $mysqli);
+	if($name=='user'||$name=='administrator')
+	{
+		echo "<script>alert('Username could not be used!');location='create.html'</script>";
+	}else
+	{
+		$counter->Create($name, $pwd, $info, $id, "create a user: {$name}", 1, $mysqli);
+	}
     break;
 	
 	case "delete":
@@ -102,7 +120,13 @@ switch($func)
 	$info = PreventSqlInjection($mysqli, $_POST["information"]);
     $id = PreventSqlInjection($mysqli, $_POST["id"]);
 	$new = PreventSqlInjection($mysqli, $_POST["newname"]);
-    $counter->Update($cookie, $name, $pwd, $info, $id, $new, $mysqli);
+	if($new=='user'||$new=='administrator')
+	{
+		echo "<script>alert('Username could not be used!');location='update.html'</script>";
+	}else
+	{
+		$counter->Update($cookie, $name, $pwd, $info, $id, $new, $mysqli);
+	}
     break;
 	
 	case "profile":
