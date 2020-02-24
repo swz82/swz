@@ -305,6 +305,22 @@ class Counter extends Objects implements IObservable
 	
 	public function Delete($key, $mysqli)
 	{
+		$records = $mysqli->query("SELECT * FROM Students WHERE username LIKE '{$key}'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='delete.html'</script>";
+			return ;
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record == NULL)
+		{
+			$this->Notify($mysqli, "delete failed");
+			echo "<script>alert('User does not exist!');location='delete.html'</script>";
+			return ;
+		}
+		
 		$result = $mysqli->query("DELETE FROM Students WHERE username = '{$key}'");
 		if($result == false)
 		{
@@ -552,6 +568,22 @@ class Counter extends Objects implements IObservable
 	
 	public function DeleteG($key, $mysqli)
 	{
+		$records = $mysqli->query("SELECT * FROM Grades WHERE name LIKE '{$key}'");
+		if($records == false)
+		{
+			die("Query contains error" . mysqli_error());
+			echo "<script>alert('Query contains error!');location='deleteG.html'</script>";
+			return ;
+		}
+
+		$record = mysqli_fetch_array($records);
+		if($record == NULL)
+		{
+			$this->Notify($mysqli, "delete failed");
+			echo "<script>alert('Record does not exist!');location='deleteG.html'</script>";
+			return ;
+		}
+		
 		$result = $mysqli->query("DELETE FROM Grades WHERE name = '{$key}'");
 		if($result == false)
 		{
@@ -575,10 +607,10 @@ class Counter extends Objects implements IObservable
 		}
 
 		$record = mysqli_fetch_array($records);
-		if($record==NULL)
+		if($record == NULL)
 		{
 			$this->Notify($mysqli, "update grades failed");
-			echo "<script>alert('Record not exists!');location='updateG.html'</script>";
+			echo "<script>alert('Record does not exist!');location='updateG.html'</script>";
 			return ;
 		}
 		
